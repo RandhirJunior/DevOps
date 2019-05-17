@@ -1,0 +1,46 @@
+
+# For more details regarding modules please go through below url.
+#https://docs.ansible.com/ansible/modules_by_category.html
+# https://docs.ansible.com/ansible/playbook_special_topics.html
+
+---                              # it's shows it's yamal file
+- name: install and start apache
+  hosts:web
+  remote_user:justin
+  become_method:sudo
+  become_user:root
+  vars:                            # for variable declaration use used vars here
+   http_port:80
+   max_clients:200
+   
+  tasks:
+  - name: install httpd
+    yum:name=httpd state=latest
+   -name: write apache config file
+    template: src=srv/httpd.j2 dest=/etc/httpd.conf
+    notify:
+    - restart apache
+   - name:start httpd
+     service:  name=httpd state=running
+     
+   handlers:
+    - name:restart apache
+      service: name=httpd state=restarted
+
+#---HOE TO RUN ANSIBLE-----------
+# Ad-Hoc: ansible <inventory> -m
+# Playbooks: ansible-playbook
+# Automation Framework:Ansible Tower
+#
+#----------Ad-Hoc-----------------------------------------------
+#~]$ ansible web -m ping
+#
+#-----------Running Playbooks-----------------------------------
+#ansible-playbook <options>
+#ansible-playbook my-playbook.yaml
+#
+#-----------------------------------------------------------------
+#
+#
+#
+#
