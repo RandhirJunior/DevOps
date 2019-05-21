@@ -2,5 +2,57 @@ Ansible tower is a web based Configuration Management System.
 Also used to scheduled the jobs.
 NASA also using Ansible currently.
 YAML is data serialization language.
+---
+-Agentless: No need for agent installation and management
+-Buit on the top of Python and hence provide a lot of Python's functionality
+-Uses SSH for secure connection.
+-Follow Push based architectute for sending configurations.
+-Very easy and fast to setup,minimal requirements.
+
+------------
+Ansible is push based
+------------------------------
+-> Central server pushes the configuration information on target servers
+-> You control when the chnages are made on the servers.
+
+----------------Ansible Components----------------------------
+1. Host Inventory
+  -> It's contains list of your hots(i.e ip's address of nodes) ,grouped together.
+  -> Default loction is /etc/ansible/hosts
+  
+2. Ansible Modules
+   -> Modules(also referred as task plugin or library plugins) are the ones which actually get executed iside a playbook
+   ->These are scripts that cme package with Ansible and perform some kind of action on a host.
+   
+   Examples:-
+         1. apt
+               Installs or removes packages using the apt package manager
+         2. copy
+               Copies a file from local machine to the hosts.
+         3. file
+               Sets the attributes of a file,symlnk, or directory.
+         4. service
+                  Starts,stops,or restarts a service.
+                  
+Ansible AD-HOC Commands
+----------------------------------------
+. ansible all-s-n shell-a `uptime` -Uptime of all the machines
+. ansible all-s-n shell-a `date`   -Date of all the machines
+. ansible all-s-n shell-a `cat/etc/redhat-release` -redhat release of the all machines
+. ansible all-s-n shell-a `mount` -Kind of mount on all the machines
+. ansible all-s-n shell-a `service sshd status` -Check the service status of all the machines.
+
+
+Ansible Playbook
+----------------------------------------------
+-> Command t run the playbook:
+   ansible-playbook file.yml
+   
+Ansible Setup
+---------------------------------------------------
+Log to one machine
+-> yum update -y (To updates all the packages)
+-> rpm -ivhhttp://dl.fedoraproject.org/pub.epel/6/i386/epel-release-6.8.noarch.rpm
+-> yum install ansible (to install ansible)
 -
 
